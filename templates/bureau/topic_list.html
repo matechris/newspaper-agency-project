@@ -3,6 +3,10 @@
 {% block content %}
   <h1>Topics</h1>
 
+  <h3>
+    <a class="btn btn-primary" href="{% url 'bureau:topic-create' %}">Create 📰</a>
+  </h3>
+
   {% if topic_list %}
     <table class="table">
       <tr>
