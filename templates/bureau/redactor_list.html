@@ -8,6 +8,10 @@
     Create a redactor
   </a>
 
+  {% block search %}
+    {% include "includes/search.html" %}
+  {% endblock %}
+
   {% if redactor_list %}
     <table class="table">
       <tr>
