@@ -3,6 +3,11 @@
 {% block content %}
   <h1>Redactors</h1>
 
+  <a class="btn btn-primary"
+     href="{% url 'bureau:redactor-create' %}">
+    Create a redactor
+  </a>
+
   {% if redactor_list %}
     <table class="table">
       <tr>

@@ -18,4 +18,12 @@
       <p>No newspapers!</p>
     {% endfor %}
   </div>
+  <a class="btn btn-primary"
+     href="{% url 'bureau:redactor-update' pk=redactor.id %}">
+    Update redactor's info
+  </a>
+  <a href="{% url 'bureau:redactor-delete' pk=redactor.id %}"
+     class="btn btn-danger">
+    Delete
+  </a>
 {% endblock %}
