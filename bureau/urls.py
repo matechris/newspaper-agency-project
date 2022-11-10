@@ -17,6 +17,8 @@ from bureau.views import (
     RedactorCreateView,
     RedactorUpdateView,
     RedactorDeleteView,
+    assign_redactor_to_newspaper,
+    delete_redactor_from_newspaper,
 )
 
 
@@ -96,6 +98,16 @@ urlpatterns = [
         "redactors/<int:pk>/delete/",
         RedactorDeleteView.as_view(),
         name="redactor-delete",
+    ),
+    path(
+        "redactors/<int:pk>/assign_to_newspaper/",
+        assign_redactor_to_newspaper,
+        name="assign-to-newspaper",
+    ),
+    path(
+        "redactors/<int:pk>/delete_from_newspaper/",
+        delete_redactor_from_newspaper,
+        name="delete-from-newspaper",
     ),
 ]
 
