@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspaper agency</h1>
+  <p>Welcome to our agency, we have the best newspapers for you!</p>
+
+  <h3>Content:</h3>
+  <ul class="content-list">
+    <li>Number of newspapers: {{ num_newspapers }}</li>
+    <li>Number of redactors: {{ num_redactors }}</li>
+    <li>Number of topics: {{ num_topics }}</li>
+  </ul>
+{% endblock %}
