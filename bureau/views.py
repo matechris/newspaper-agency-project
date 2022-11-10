@@ -45,7 +45,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        form = TopicSearchForm(self.request.GET)
+        form = NewspaperSearchForm(self.request.GET)
         if form.is_valid():
             return self.queryset.filter(
                 title__icontains=form.cleaned_data["title"]
