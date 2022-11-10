@@ -34,3 +34,19 @@ class TopicListView(generic.ListView):
 class RedactorListView(generic.ListView):
     model = Redactor
     paginate_by = 10
+
+
+class NewspaperDetailView(generic.DetailView):
+    model = Newspaper
+    queryset = Newspaper.objects.prefetch_related("topic", "publishers")
+
+
+class RedactorDetailView(generic.DetailView):
+    model = Redactor
+    queryset = Redactor.objects.prefetch_related(
+        "newspapers"
+    )
+
+class TopicDetailView(generic.DetailView):
+    model = Topic
+    queryset = Topic.objects.prefetch_related("newspapers")

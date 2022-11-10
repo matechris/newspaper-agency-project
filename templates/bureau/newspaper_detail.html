@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspaper № {{ newspaper.id }}</h1>
+  <h3><strong><i>{{ newspaper.title }}</i></strong><br></h3>
+  <h5>Topic:</h5>
+  <div class="ml-3">
+    <p>{{ newspaper.topic }}</p>
+  </div>
+
+  <h5>Content:</h5>
+  <div class="ml-3">
+    <p>{{ newspaper.content }}</p>
+  </div>
+
+  <h5>Publishers:</h5>
+  <div class="ml-3">
+    {% for redactor in newspaper.publishers.all %}
+      <p>
+        <a href="{% url 'bureau:redactor-detail' pk=redactor.id %}">
+          {{ redactor.username }}
+        </a>
+        <strong>({{ redactor.first_name }} {{ redactor.last_name }})</strong>
+      </p>
+    {% endfor %}
+  </div>
+
+  <h5>Published date:</h5>
+  <div class="ml-3">
+    {{ newspaper.published_date }}
+  </div>
+{% endblock %}

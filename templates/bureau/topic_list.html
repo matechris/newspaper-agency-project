@@ -11,7 +11,9 @@
       {% for topic in topic_list %}
         <tr>
           <td>{{ topic.id }}</td>
-          <td>{{ topic.name }}</td>
+          <td>
+            <a href="{% url 'bureau:topic-detail' pk=topic.id %}">{{ topic.name }}</a>
+          </td>
         </tr>
     {% endfor %}
     </table>
