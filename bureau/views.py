@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
@@ -5,6 +7,7 @@ from django.views import generic
 from bureau.models import Newspaper, Redactor, Topic
 
 
+@login_required
 def index(request) -> HttpResponse:
     num_redactors = Redactor.objects.count()
     num_topics = Topic.objects.count()
@@ -23,34 +26,35 @@ def index(request) -> HttpResponse:
     return render(request, "bureau/index.html", context=context)
 
 
-class NewspaperListView(generic.ListView):
+class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 10
     queryset = Newspaper.objects.order_by("-published_date")
 
 
-class TopicListView(generic.ListView):
+class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     paginate_by = 10
     queryset = Topic.objects.order_by("name")
 
 
-class RedactorListView(generic.ListView):
+class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 10
 
 
-class NewspaperDetailView(generic.DetailView):
+class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
     queryset = Newspaper.objects.prefetch_related("topic", "publishers")
 
 
-class RedactorDetailView(generic.DetailView):
+class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
     queryset = Redactor.objects.prefetch_related(
         "newspapers"
     )
 
-class TopicDetailView(generic.DetailView):
+
+class TopicDetailView(LoginRequiredMixin, generic.DetailView):
     model = Topic
     queryset = Topic.objects.prefetch_related("newspapers")
