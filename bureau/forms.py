@@ -13,6 +13,9 @@ class RedactorCreationForm(UserCreationForm):
             "first_name", "last_name", "years_of_experience",
         )
 
+    def clean_years_of_experience(self):
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+
 
 class RedactorExperienceUpdateForm(forms.ModelForm):
     class Meta:
@@ -20,14 +23,14 @@ class RedactorExperienceUpdateForm(forms.ModelForm):
         fields = ("username", "first_name", "last_name", "email", "years_of_experience")
 
     def clean_years_of_experience(self):
-        years = self.cleaned_data["years_of_experience"]
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
-        if years < 0:
-            raise ValidationError(
-                "Ensure that years value is >= 0"
-            )
 
-        return years
+def validate_years_of_experience(years):
+    if years < 0:
+        raise ValidationError("Years value must be >= 0!")
+
+    return years
 
 
 class NewspaperForm(forms.ModelForm):
