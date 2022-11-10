@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from bureau.models import Newspaper, Redactor, Topic
@@ -58,3 +59,20 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
 class TopicDetailView(LoginRequiredMixin, generic.DetailView):
     model = Topic
     queryset = Topic.objects.prefetch_related("newspapers")
+
+
+class NewspaperCreateView(generic.CreateView):
+    model = Newspaper
+    fields = "__all__"
+    success_url = reverse_lazy("bureau:newspaper-list")
+
+
+class NewspaperUpdateView(generic.UpdateView):
+    model = Newspaper
+    fields = "__all__"
+    success_url = reverse_lazy("bureau:newspaper-list")
+
+
+class NewspaperDeleteView(generic.DeleteView):
+    model = Newspaper
+    success_url = reverse_lazy("bureau:newspaper-list")
