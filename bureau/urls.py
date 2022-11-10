@@ -5,6 +5,8 @@ from bureau.views import (
     NewspaperListView,
     TopicListView,
     RedactorListView,
+    NewspaperDetailView,
+    RedactorDetailView,
 )
 
 
@@ -24,6 +26,16 @@ urlpatterns = [
         "redactors/",
         RedactorListView.as_view(),
         name="redactor-list"
+    ),
+    path(
+        "redactors/<int:pk>/",
+        RedactorListView.as_view(),
+        name="redactor-detail"
+    ),
+    path(
+        "newspapers/<int:pk>/",
+        NewspaperListView.as_view(),
+        name="newspaper-detail"
     ),
 ]
 
