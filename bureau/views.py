@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from bureau.forms import RedactorCreationForm, RedactorExperienceUpdateForm
 from bureau.models import Newspaper, Redactor, Topic
 
 
@@ -93,3 +94,20 @@ class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     success_url = reverse_lazy("bureau:topic-list")
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+    success_url = reverse_lazy("bureau:redactor-list")
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    form_class = RedactorExperienceUpdateForm
+    success_url = reverse_lazy("bureau:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    success_url = reverse_lazy("bureau:redactor-list")
