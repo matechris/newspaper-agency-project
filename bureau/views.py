@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -111,3 +111,21 @@ class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
     success_url = reverse_lazy("bureau:redactor-list")
+
+
+@login_required
+def assign_redactor_to_newspaper(request, pk):
+    newspaper = Newspaper.objects.get(id=pk)
+    newspaper.publishers.add(request.user.id)
+    return HttpResponseRedirect(
+        reverse_lazy("bureau:newspaper-detail", args=[pk])
+    )
+
+
+@login_required
+def delete_redactor_from_newspaper(request, pk):
+    newspaper = Newspaper.objects.get(id=pk)
+    newspaper.publishers.remove(request.user.id)
+    return HttpResponseRedirect(
+        reverse_lazy("bureau:newspaper-detail", args=[pk])
+    )
