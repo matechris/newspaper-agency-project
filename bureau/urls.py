@@ -14,6 +14,9 @@ from bureau.views import (
     TopicCreateView,
     TopicUpdateView,
     TopicDeleteView,
+    RedactorCreateView,
+    RedactorUpdateView,
+    RedactorDeleteView,
 )
 
 
@@ -78,6 +81,21 @@ urlpatterns = [
         "topics/<int:pk>/delete/",
         TopicDeleteView.as_view(),
         name="topic-delete"
+    ),
+    path(
+        "redactors/create/",
+        RedactorCreateView.as_view(),
+        name="redactor-create",
+    ),
+    path(
+        "redactors/<int:pk>/update/",
+        RedactorUpdateView.as_view(),
+        name="redactor-update",
+    ),
+    path(
+        "redactors/<int:pk>/delete/",
+        RedactorDeleteView.as_view(),
+        name="redactor-delete",
     ),
 ]
 
