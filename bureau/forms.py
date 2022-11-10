@@ -16,7 +16,7 @@ class RedactorCreationForm(UserCreationForm):
 class RedactorExperienceUpdateForm(forms.ModelForm):
     class Meta:
         model = Redactor
-        fields = ("years_of_experience",)
+        fields = ("username", "first_name", "last_name", "email", "years_of_experience")
 
     def clean_years_of_experience(self):
         years = self.cleaned_data["years_of_experience"]
