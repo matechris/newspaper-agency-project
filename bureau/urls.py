@@ -52,12 +52,12 @@ urlpatterns = [
         name="newspaper-create"
     ),
     path(
-        "newspapers/update/",
+        "newspapers/<int:pk>/update/",
         NewspaperUpdateView.as_view(),
         name="newspaper-update"
     ),
     path(
-        "newspapers/delete/",
+        "newspapers/<int:pk>/delete/",
         NewspaperDeleteView.as_view(),
         name="newspaper-delete"
     ),

@@ -61,18 +61,18 @@ class TopicDetailView(LoginRequiredMixin, generic.DetailView):
     queryset = Topic.objects.prefetch_related("newspapers")
 
 
-class NewspaperCreateView(generic.CreateView):
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     fields = "__all__"
     success_url = reverse_lazy("bureau:newspaper-list")
 
 
-class NewspaperUpdateView(generic.UpdateView):
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     fields = "__all__"
     success_url = reverse_lazy("bureau:newspaper-list")
 
 
-class NewspaperDeleteView(generic.DeleteView):
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("bureau:newspaper-list")
