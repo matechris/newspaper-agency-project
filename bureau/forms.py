@@ -1,8 +1,9 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from bureau.models import Redactor
+from bureau.models import Redactor, Newspaper
 
 
 class RedactorCreationForm(UserCreationForm):
@@ -27,3 +28,15 @@ class RedactorExperienceUpdateForm(forms.ModelForm):
             )
 
         return years
+
+
+class NewspaperForm(forms.ModelForm):
+    publishers = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
+
+    class Meta:
+        model = Newspaper
+        fields = "__all__"
