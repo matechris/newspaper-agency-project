@@ -1,3 +1,11 @@
+{% if user.is_authenticated %}
+  User: <a href="{% url 'bureau:redactor-detail' pk=user.id %}">{{ user.username }}</a><br>
+  <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+{% endif %}
+<br>
+
 <ul class="sidebar-nav">
   <li><a href="{% url 'bureau:index' %}">Home page</a></li>
   <li><a href="{% url 'bureau:topic-list' %}">Topics</a></li>
