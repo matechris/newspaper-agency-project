@@ -29,4 +29,7 @@
   <div class="ml-3">
     {{ newspaper.published_date }}
   </div>
+  <br>
+  <h3><a class="btn btn-primary" href="{% url 'bureau:newspaper-update' pk=newspaper.id %}">Update ✏</a> |
+  <a class="btn btn-danger" href="{% url 'bureau:newspaper-delete' pk=newspaper.id %}">Delete 🗑</a></h3>
 {% endblock %}
