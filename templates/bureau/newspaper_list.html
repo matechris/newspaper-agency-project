@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspapers</h1>
+
+  {% if newspaper_list %}
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Published date</th>
+      </tr>
+      {% for newspaper in newspaper_list %}
+        <tr>
+          <td><a href="#">{{ newspaper.title }}</a></td>
+          <td>{{ newspaper.published_date }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    There are no newspapers yet 😔
+  {% endif %}
+{% endblock %}
