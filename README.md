@@ -4,7 +4,7 @@ Django project for managing newspapers, redactors and topics in newspaper agency
 
 ## Check it out!
 
-[Newspaper agency deployed](LINK)
+[Newspaper agency deployed on Render](https://newspaper-agency-w5mp.onrender.com/)
 
 ## Installation
 
@@ -24,3 +24,7 @@ python manage.py runserver
 * Authentication functionality for Redactor/User
 * Managing newspapers, redactors and topics directly from website
 * Powerful admin panel for advanced managing
+
+## Login to website:
+login: new_user
+password: 8b2CdupLQjQ
