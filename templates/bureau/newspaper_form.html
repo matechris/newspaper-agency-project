@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+  <br>
+  <h1>{{ object|yesno:"Update, Create" }} a newspaper</h1>
+
+  <form action="" method="post" novalidate class="form-change">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input class="btn btn-primary" type="submit" name="Submit">
+  </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+<div>
+
+  {% if user.is_authenticated %}
+    <p style="color: #fff">USER: <a href="{% url 'bureau:redactor-detail' pk=user.id %}">{{ user.username }}</a></p>
+    <button type="button"><span></span>
+      <a href="{% url 'logout' %}">LOGOUT</a>
+    </button>
+  {% else %}
+    <button type="button">
+      <span></span>
+      <a href="{% url 'login' %}">LOGIN</a>
+    </button>
+  {% endif %}
+</div>
+
+<ul class="sidebar-nav">
+  <li><a href="{% url 'bureau:index' %}">Home page</a></li>
+  <li><a href="{% url 'bureau:topic-list' %}">Topics</a></li>
+  <li><a href="{% url 'bureau:newspaper-list' %}">Newspapers</a></li>
+  <li><a href="{% url 'bureau:redactor-list' %}">Redactors</a></li>
+</ul>
+
+<br>

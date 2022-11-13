@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Redactors</h1>
+
+  <a class="btn btn-primary"
+     style="float: right"
+     href="{% url 'bureau:redactor-create' %}">
+    Create a redactor
+  </a>
+
+  {% block search %}
+    {% include "includes/search.html" %}
+  {% endblock %}
+
+  {% if redactor_list %}
+    <table class="table">
+      <tr>
+        <th style="color: #fff">Username</th>
+        <th style="color: #fff">Name</th>
+        <th style="color: #fff">Surname</th>
+        <th style="color: #fff">Years of experience</th>
+      </tr>
+      {% for redactor in redactor_list %}
+        <tr>
+          <td>
+            <a href="{% url 'bureau:redactor-detail' pk=redactor.id %}">
+              {{ redactor.username }}
+              {% if redactor.id == user.id %}
+                <strong>(Me)</strong>
+              {% endif %}
+            </a>
+          </td>
+          <td style="color: #fff">{{ redactor.first_name }}</td>
+          <td style="color: #fff">{{ redactor.last_name }}</td>
+          <td style="color: #fff">{{ redactor.years_of_experience }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    There are no redactors yet 😔
+  {% endif %}
+{% endblock %}

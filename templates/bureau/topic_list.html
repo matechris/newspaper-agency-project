@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Topics</h1>
+
+  <h3>
+    <a class="btn btn-primary" href="{% url 'bureau:topic-create' %}" style="float: right">
+      Create 📰
+    </a>
+  </h3>
+
+  {% block search %}
+    {% include "includes/search.html" %}
+  {% endblock %}
+
+  {% if topic_list %}
+    <table class="table">
+      <tr>
+        <th style="color: #fff">Number</th>
+        <th style="color: #fff">Name</th>
+      </tr>
+      {% for topic in topic_list %}
+        <tr>
+          <td style="color: #fff">{{ topic.id }}</td>
+          <td>
+            <a href="{% url 'bureau:topic-detail' pk=topic.id %}">{{ topic.name }}</a>
+          </td>
+        </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    There are no topics yet 😔
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Newspaper № {{ newspaper.id }}</h2>
+  <h3><strong><i>{{ newspaper.title }}</i></strong><br></h3>
+
+  <div class="detail-content">
+    <p>{{ newspaper.content }}</p>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <h5>Publishers:</h5>
+        {% for redactor in newspaper.publishers.all %}
+          <p>
+            <a href="{% url 'bureau:redactor-detail' pk=redactor.id %}">
+              {{ redactor.username }}
+            </a>
+            <strong>({{ redactor.first_name }} {{ redactor.last_name }})</strong>
+          </p>
+        {% endfor %}
+    </div>
+    <div class="center">
+      <h5>Topic:</h5>
+      <div>
+        <p><a href="{% url 'bureau:topic-detail' pk=newspaper.topic.id %}">{{ newspaper.topic }}</a></p>
+      </div>
+    </div>
+    <div class="right">
+      <h5>Published date:</h5>
+        {{ newspaper.published_date }}
+    </div>
+  </div>
+
+  <div>
+    {% if user not in newspaper.publishers.all %}
+      <a class="btn btn-success"
+         href="{% url 'bureau:assign-to-newspaper' pk=newspaper.id %}">
+        Assign me to this newspaper
+      </a>
+    {% else %}
+      <a class="btn btn-danger"
+         href="{% url 'bureau:delete-from-newspaper' pk=newspaper.id %}">
+        Delete me from this newspaper
+      </a>
+    {% endif %}
+  </div>
+  <br>
+  <h3><a class="btn btn-primary" href="{% url 'bureau:newspaper-update' pk=newspaper.id %}">Update ✏</a> |
+  <a class="btn btn-danger" href="{% url 'bureau:newspaper-delete' pk=newspaper.id %}">Delete 🗑</a></h3>
+{% endblock %}
