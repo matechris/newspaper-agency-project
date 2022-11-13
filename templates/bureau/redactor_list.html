@@ -4,6 +4,7 @@
   <h1>Redactors</h1>
 
   <a class="btn btn-primary"
+     style="float: right"
      href="{% url 'bureau:redactor-create' %}">
     Create a redactor
   </a>
@@ -15,10 +16,10 @@
   {% if redactor_list %}
     <table class="table">
       <tr>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Years of experience</th>
+        <th style="color: #fff">Username</th>
+        <th style="color: #fff">Name</th>
+        <th style="color: #fff">Surname</th>
+        <th style="color: #fff">Years of experience</th>
       </tr>
       {% for redactor in redactor_list %}
         <tr>
@@ -30,9 +31,9 @@
               {% endif %}
             </a>
           </td>
-          <td>{{ redactor.first_name }}</td>
-          <td>{{ redactor.last_name }}</td>
-          <td>{{ redactor.years_of_experience }}</td>
+          <td style="color: #fff">{{ redactor.first_name }}</td>
+          <td style="color: #fff">{{ redactor.last_name }}</td>
+          <td style="color: #fff">{{ redactor.years_of_experience }}</td>
         </tr>
     {% endfor %}
     </table>

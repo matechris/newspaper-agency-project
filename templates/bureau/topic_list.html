@@ -4,7 +4,9 @@
   <h1>Topics</h1>
 
   <h3>
-    <a class="btn btn-primary" href="{% url 'bureau:topic-create' %}">Create 📰</a>
+    <a class="btn btn-primary" href="{% url 'bureau:topic-create' %}" style="float: right">
+      Create 📰
+    </a>
   </h3>
 
   {% block search %}
@@ -14,11 +16,12 @@
   {% if topic_list %}
     <table class="table">
       <tr>
-        <th>Name</th>
+        <th style="color: #fff">Number</th>
+        <th style="color: #fff">Name</th>
       </tr>
       {% for topic in topic_list %}
         <tr>
-          <td>{{ topic.id }}</td>
+          <td style="color: #fff">{{ topic.id }}</td>
           <td>
             <a href="{% url 'bureau:topic-detail' pk=topic.id %}">{{ topic.name }}</a>
           </td>

@@ -31,7 +31,7 @@ def index(request) -> HttpResponse:
 
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
-    paginate_by = 10
+    paginate_by = 5
     queryset = Newspaper.objects.order_by("-published_date")
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -54,7 +54,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
-    paginate_by = 10
+    paginate_by = 5
     queryset = Topic.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -77,7 +77,7 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
-    paginate_by = 10
+    paginate_by = 5
     queryset = Redactor.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):

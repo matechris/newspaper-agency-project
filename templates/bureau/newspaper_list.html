@@ -4,7 +4,9 @@
   <h1>Newspapers</h1>
 
   <h3>
-    <a class="btn btn-primary" href="{% url 'bureau:newspaper-create' %}">Create 📰</a>
+    <a class="btn btn-primary" href="{% url 'bureau:newspaper-create' %}" style="float: right">
+      Create 📰
+    </a>
   </h3>
 
   {% block search %}
@@ -14,8 +16,8 @@
   {% if newspaper_list %}
     <table class="table">
       <tr>
-        <th>Title</th>
-        <th>Published date</th>
+        <th style="color: #fff">Title</th>
+        <th style="color: #fff">Published date</th>
       </tr>
       {% for newspaper in newspaper_list %}
         <tr>
@@ -23,7 +25,7 @@
             {{ newspaper.title }}
               </a>
           </td>
-          <td>{{ newspaper.published_date }}</td>
+          <td style="color: #fff">{{ newspaper.published_date }}</td>
         </tr>
     {% endfor %}
     </table>

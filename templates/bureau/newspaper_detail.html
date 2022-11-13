@@ -1,35 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Newspaper № {{ newspaper.id }}</h1>
+  <h2>Newspaper № {{ newspaper.id }}</h2>
   <h3><strong><i>{{ newspaper.title }}</i></strong><br></h3>
-  <h5>Topic:</h5>
-  <div class="ml-3">
-    <p>{{ newspaper.topic }}</p>
-  </div>
 
-  <h5>Content:</h5>
-  <div class="ml-3">
+  <div class="detail-content">
     <p>{{ newspaper.content }}</p>
   </div>
 
-  <h5>Publishers:</h5>
-  <div class="ml-3">
-    {% for redactor in newspaper.publishers.all %}
-      <p>
-        <a href="{% url 'bureau:redactor-detail' pk=redactor.id %}">
-          {{ redactor.username }}
-        </a>
-        <strong>({{ redactor.first_name }} {{ redactor.last_name }})</strong>
-      </p>
-    {% endfor %}
+  <div class="container">
+    <div class="left">
+      <h5>Publishers:</h5>
+        {% for redactor in newspaper.publishers.all %}
+          <p>
+            <a href="{% url 'bureau:redactor-detail' pk=redactor.id %}">
+              {{ redactor.username }}
+            </a>
+            <strong>({{ redactor.first_name }} {{ redactor.last_name }})</strong>
+          </p>
+        {% endfor %}
+    </div>
+    <div class="center">
+      <h5>Topic:</h5>
+      <div>
+        <p><a href="{% url 'bureau:topic-detail' pk=newspaper.topic.id %}">{{ newspaper.topic }}</a></p>
+      </div>
+    </div>
+    <div class="right">
+      <h5>Published date:</h5>
+        {{ newspaper.published_date }}
+    </div>
   </div>
 
-  <h5>Published date:</h5>
-  <div class="ml-3">
-    {{ newspaper.published_date }}
-  </div>
-  <br>
   <div>
     {% if user not in newspaper.publishers.all %}
       <a class="btn btn-success"
