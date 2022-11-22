@@ -11,7 +11,7 @@ class FormsTest(TestCase):
             "password2": "user1234",
             "first_name": "Test first",
             "last_name": "Test second",
-            "years_of_experience": 1
+            "years_of_experience": 1,
         }
         form = RedactorCreationForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -24,7 +24,7 @@ class FormsTest(TestCase):
             "password2": "user1234",
             "first_name": "Test first",
             "last_name": "Test second",
-            "years_of_experience": -2
+            "years_of_experience": -2,
         }
         form = RedactorCreationForm(data=form_data)
         self.assertFalse(form.is_valid())

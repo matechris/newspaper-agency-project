@@ -48,14 +48,9 @@ class PrivateViewsTest(TestCase):
             name="Test",
         )
         Newspaper.objects.create(
-            title="Test title",
-            content="Test content",
-            topic=topic
+            title="Test title", content="Test content", topic=topic
         )
-        self.user = get_user_model().objects.create_user(
-            "new_user",
-            "user1234"
-        )
+        self.user = get_user_model().objects.create_user("new_user", "user1234")
         self.client.force_login(self.user)
 
     def test_user_access_to_home_page(self):
@@ -68,30 +63,21 @@ class PrivateViewsTest(TestCase):
         response = self.client.get(NEWSPAPER_LIST)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            list(response.context["newspaper_list"]),
-            list(newspapers)
-        )
+        self.assertEqual(list(response.context["newspaper_list"]), list(newspapers))
 
     def test_user_access_to_redactor_list(self):
         redactors = get_user_model().objects.all()
         response = self.client.get(REDACTOR_LIST)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            list(response.context["redactor_list"]),
-            list(redactors)
-        )
+        self.assertEqual(list(response.context["redactor_list"]), list(redactors))
 
     def test_user_access_to_topic_list(self):
         topics = Topic.objects.all()
         response = self.client.get(TOPIC_LIST)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            list(response.context["topic_list"]),
-            list(topics)
-        )
+        self.assertEqual(list(response.context["topic_list"]), list(topics))
 
     def test_user_access_to_login_page(self):
         response = self.client.get(LOGIN_PAGE)
@@ -102,10 +88,7 @@ class PrivateViewsTest(TestCase):
 
 class CreateViewsTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            "new_user",
-            "user1234"
-        )
+        self.user = get_user_model().objects.create_user("new_user", "user1234")
         self.client.force_login(self.user)
 
     def test_redactor_create_view(self):
@@ -115,7 +98,7 @@ class CreateViewsTest(TestCase):
             "password2": "user1234",
             "first_name": "Test first",
             "last_name": "Test last",
-            "years_of_experience": 5
+            "years_of_experience": 5,
         }
         self.client.post(reverse("bureau:redactor-create"), data=form_data)
         user = get_user_model().objects.get(username=form_data["username"])

@@ -5,8 +5,14 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from bureau.forms import RedactorCreationForm, RedactorExperienceUpdateForm, NewspaperForm, TopicSearchForm, \
-    NewspaperSearchForm, RedactorSearchForm
+from bureau.forms import (
+    RedactorCreationForm,
+    RedactorExperienceUpdateForm,
+    NewspaperForm,
+    TopicSearchForm,
+    NewspaperSearchForm,
+    RedactorSearchForm,
+)
 from bureau.models import Newspaper, Redactor, Topic
 
 
@@ -23,7 +29,7 @@ def index(request) -> HttpResponse:
         "num_redactors": num_redactors,
         "num_topics": num_topics,
         "num_newspapers": num_newspapers,
-        "num_visits": num_visits
+        "num_visits": num_visits,
     }
 
     return render(request, "bureau/index.html", context=context)
@@ -39,17 +45,17 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
         title = self.request.GET.get("title", "")
 
-        context["search_form"] = NewspaperSearchForm(initial={
-            "title": title,
-        })
+        context["search_form"] = NewspaperSearchForm(
+            initial={
+                "title": title,
+            }
+        )
         return context
 
     def get_queryset(self):
         form = NewspaperSearchForm(self.request.GET)
         if form.is_valid():
-            return self.queryset.filter(
-                title__icontains=form.cleaned_data["title"]
-            )
+            return self.queryset.filter(title__icontains=form.cleaned_data["title"])
 
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
@@ -62,17 +68,17 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
 
         name = self.request.GET.get("name", "")
 
-        context["search_form"] = TopicSearchForm(initial={
-            "name": name,
-        })
+        context["search_form"] = TopicSearchForm(
+            initial={
+                "name": name,
+            }
+        )
         return context
 
     def get_queryset(self):
         form = TopicSearchForm(self.request.GET)
         if form.is_valid():
-            return self.queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return self.queryset.filter(name__icontains=form.cleaned_data["name"])
 
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
@@ -85,9 +91,11 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
         username = self.request.GET.get("username", "")
 
-        context["search_form"] = RedactorSearchForm(initial={
-            "username": username,
-        })
+        context["search_form"] = RedactorSearchForm(
+            initial={
+                "username": username,
+            }
+        )
         return context
 
     def get_queryset(self):
@@ -105,9 +113,7 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
-    queryset = Redactor.objects.prefetch_related(
-        "newspapers"
-    )
+    queryset = Redactor.objects.prefetch_related("newspapers")
 
 
 class TopicDetailView(LoginRequiredMixin, generic.DetailView):
@@ -170,15 +176,11 @@ class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
 def assign_redactor_to_newspaper(request, pk):
     newspaper = Newspaper.objects.get(id=pk)
     newspaper.publishers.add(request.user.id)
-    return HttpResponseRedirect(
-        reverse_lazy("bureau:newspaper-detail", args=[pk])
-    )
+    return HttpResponseRedirect(reverse_lazy("bureau:newspaper-detail", args=[pk]))
 
 
 @login_required
 def delete_redactor_from_newspaper(request, pk):
     newspaper = Newspaper.objects.get(id=pk)
     newspaper.publishers.remove(request.user.id)
-    return HttpResponseRedirect(
-        reverse_lazy("bureau:newspaper-detail", args=[pk])
-    )
+    return HttpResponseRedirect(reverse_lazy("bureau:newspaper-detail", args=[pk]))

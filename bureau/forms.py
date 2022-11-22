@@ -10,7 +10,9 @@ class RedactorCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Redactor
         fields = UserCreationForm.Meta.fields + (
-            "first_name", "last_name", "years_of_experience",
+            "first_name",
+            "last_name",
+            "years_of_experience",
         )
 
     def clean_years_of_experience(self):
@@ -50,7 +52,7 @@ class RedactorSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by username"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by username"}),
     )
 
 
@@ -59,7 +61,7 @@ class NewspaperSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by title"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by title"}),
     )
 
 
@@ -68,5 +70,5 @@ class TopicSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by name"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"}),
     )

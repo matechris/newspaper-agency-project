@@ -26,13 +26,10 @@ class Newspaper(models.Model):
     content = models.TextField()
     published_date = models.DateField(auto_now_add=True)
     topic = models.ForeignKey(
-        to=Topic,
-        on_delete=models.CASCADE,
-        related_name="newspapers"
+        to=Topic, on_delete=models.CASCADE, related_name="newspapers"
     )
     publishers = models.ManyToManyField(
-        to=settings.AUTH_USER_MODEL,
-        related_name="newspapers"
+        to=settings.AUTH_USER_MODEL, related_name="newspapers"
     )
 
     def __str__(self) -> str:
