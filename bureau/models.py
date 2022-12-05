@@ -9,6 +9,9 @@ class Topic(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    class Meta:
+        ordering = ("name",)
+
 
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(null=True)
@@ -34,3 +37,6 @@ class Newspaper(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title} (publishing date: {self.published_date})"
+
+    class Meta:
+        ordering = ("published_date",)
