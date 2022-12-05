@@ -16,6 +16,8 @@ cd newspaper-agency-project
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 
@@ -26,5 +28,11 @@ python manage.py runserver
 * Powerful admin panel for advanced managing
 
 ## Login to website:
+```
 login: new_user
 password: 8b2CdupLQjQ
+```
+
+
+## Demo
+![Website interface](main_page.png)
