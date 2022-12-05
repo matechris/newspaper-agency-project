@@ -106,3 +106,38 @@ class CreateViewsTest(TestCase):
         self.assertEqual(user.first_name, form_data["first_name"])
         self.assertEqual(user.last_name, form_data["last_name"])
         self.assertEqual(user.years_of_experience, form_data["years_of_experience"])
+
+
+class TestSearchField(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            "user", "testuser123"
+        )
+        self.client.force_login(self.user)
+
+    def test_search_topic(self):
+        response = self.client.get("/topics/?name=a/")
+
+        self.assertQuerysetEqual(
+            response.context["topic_list"],
+            Topic.objects.filter(name__icontains="a")
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_redactor(self):
+        response = self.client.get("/redactors/?username=a/")
+
+        self.assertQuerysetEqual(
+            response.context["redactor_list"],
+            get_user_model().objects.filter(username__icontains="a")
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_newspaper(self):
+        response = self.client.get("/newspapers/?title=t/")
+
+        self.assertQuerysetEqual(
+            response.context["newspaper_list"],
+            Newspaper.objects.filter(title__icontains="t")
+        )
+        self.assertEqual(response.status_code, 200)
